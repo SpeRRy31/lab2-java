@@ -1,6 +1,29 @@
+import java.io.*;
+import java.util.*;
 public class Main {
     Customer customerArray [] = new Customer[5];
     public static void main(String[] args) {
+        Main main = new Main();
+        main.run();
+
+    }
+
+    public void run(){
+        createCustomers();
+        printCustomers(customerArray);
+
+        Scanner s = new Scanner(System.in);
+        System.out.println("Find by name: ");
+        printCustomerByName(s.nextLine(), customerArray);
+
+
+        Scanner a = new Scanner(System.in);
+        System.out.println("Find by range balance: ");
+        printCustomersBetweenRange(a.nextInt(), a.nextInt(), customerArray);
+
+        System.out.println("Null balance");
+        printCustomerCountNullBalance(customerArray);
+
 
     }
     public void createCustomers(){
@@ -11,9 +34,35 @@ public class Main {
         customerArray[4] = new Customer(104, "Abu", "Dhabi", "Skyfall", "L. Hamilton 44", 888888, 33441000, 44);
     }
 
-    public void printCustmers(int el []){
-        for (int i = 0; i <el.length; i ++) {
-            
+    public void printCustomers(Customer array[]){
+        for (int i = 0; i <array.length; i ++) {
+            System.out.println(array[i].toString());
+        }
+    }
+
+    public void printCustomerByName(String name, Customer array[]){
+        for (int i = 0; i <array.length; i ++) {
+            if (array[i].getName().equals(name)){
+                System.out.println(array[i].toString());
+            }
+        }
+    }
+
+    public void printCustomersBetweenRange(double begin, double end, Customer array[]){
+        for (int i = 0; i <array.length; i ++) {
+            if (array[i].getBonusBalance() >= begin && array[i].getBonusBalance() <= end){
+                System.out.println(array[i].toString());
+            }
+        }
+    }
+
+    public void printCustomerCountNullBalance(Customer array[]){
+        int count = 0;
+        for (int i = 0; i <array.length; i ++){
+            if (array[i].getBonusBalance() == 0){
+                count++;
+                System.out.println(array[i].toString());
+            }
         }
     }
 }
